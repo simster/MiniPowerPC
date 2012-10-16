@@ -28,7 +28,7 @@ public class Befehlssatz {
 		Prozessorvariablen.getInstance().setAkku(neuAkku);
 	}
 
-	// Akku eird mit direktem Operanden addiert und in den Akku
+	// Akku wird mit direktem Operanden addiert und in den Akku
 	// geschrieben.(noch falsch-hier mit Reg1)
 	public void addd() {
 		int neuAkku = Prozessorvariablen.getInstance().getAkku();
