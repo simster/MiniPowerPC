@@ -23,7 +23,7 @@ public class Hauptgui {
 	}
 
 	private void createFrame() {
-		frame = new JFrame("Turingmaschine");
+		frame = new JFrame("MiniPowerPC");
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -36,7 +36,7 @@ public class Hauptgui {
 
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
-		frame.setSize(1200, 800);
+		frame.setSize(800, 750);
 		frame.setVisible(true);
 
 	}

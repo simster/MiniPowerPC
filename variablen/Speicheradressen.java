@@ -17,6 +17,22 @@ public class Speicheradressen {
 	int s524;
 	int s526;
 	int s528;
+	
+	private static Speicheradressen instance = null;
+
+
+	public static void setInstance(Speicheradressen instance) {
+		Speicheradressen.instance = instance;
+	}
+	
+	public static Speicheradressen getInstance() {
+		if (instance == null){
+			instance = new Speicheradressen();
+		}
+		return instance;
+	}
+	
+	
 	public int getS500() {
 		return s500;
 	}
