@@ -10,7 +10,7 @@ public class Prozessorvariablen {
 	
 	int carryflag;
 	int befehlszaehler;
-	String aktBefehl;
+	String aktBefehl = "---";
 	
 	private static Prozessorvariablen instance = null;
 	

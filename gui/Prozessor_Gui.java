@@ -1,22 +1,26 @@
 package gui;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+import variablen.Befehlsadressen;
 import variablen.Prozessorvariablen;
 import variablen.Speicheradressen;
 
 public class Prozessor_Gui extends JPanel{
 	
-	/**
-	 * 
-	 */
+	private static Prozessor_Gui instance = null;
+	
 	private static final long serialVersionUID = 1L;
 	private JLabel lblZehner = new JLabel("10er-System");
 	private JLabel lblBinaer = new JLabel("2er-System");
@@ -109,7 +113,21 @@ public class Prozessor_Gui extends JPanel{
 	private JTextField txtVariableB;
 	
 	
+	
+	public static void setInstance(Prozessor_Gui instance) {
+		Prozessor_Gui.instance = instance;
+	}
+	
+	public static Prozessor_Gui getInstance() {
+		if (instance == null){
+			instance = new Prozessor_Gui();
+		}
+		return instance;
+	}
 
+	
+	
+	
 	public Prozessor_Gui(){
 
 		SpringLayout layout = new SpringLayout();
@@ -120,36 +138,38 @@ public class Prozessor_Gui extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setStartposition();
+				refresh();
 
 			}
 		});
 		
 		
-	
-		
-		
 		JButton btnStep = new JButton("Step");
-		btnStart.addActionListener(new ActionListener() {
+		btnStep.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
+				nextStep();
+				refresh();
 			}
 		});
 		
 		
 		JButton btnSlow = new JButton("Slow-Modus");
-		btnStart.addActionListener(new ActionListener() {
+		btnSlow.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("Hallo3");
 
 			}
 		});
 		
 		
 		JButton btnFast = new JButton("Fast-Modus");
-		btnStart.addActionListener(new ActionListener() {
+		btnFast.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("Hallo4");
 
 			}
 		});
@@ -323,11 +343,11 @@ public class Prozessor_Gui extends JPanel{
 		
 		layout.putConstraint(SpringLayout.WEST, btnStart, 200, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, btnStart, 6, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, btnStep, 30, SpringLayout.EAST, btnStart);
+		layout.putConstraint(SpringLayout.WEST, btnStep, 350, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, btnStep, 6, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, btnSlow, 30, SpringLayout.EAST, btnStep);
+		layout.putConstraint(SpringLayout.WEST, btnSlow, 450, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, btnSlow, 6, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, btnFast, 30, SpringLayout.EAST, btnSlow);
+		layout.putConstraint(SpringLayout.WEST, btnFast, 600, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, btnFast, 6, SpringLayout.NORTH, this);
 		
 		layout.putConstraint(SpringLayout.WEST, txtVariableA, 5, SpringLayout.EAST, lblVariableA);
@@ -496,32 +516,89 @@ public class Prozessor_Gui extends JPanel{
 		layout.putConstraint(SpringLayout.NORTH, lblSp15, 5, SpringLayout.SOUTH, lblSp14);
 		layout.putConstraint(SpringLayout.WEST, lblSp15B, 150, SpringLayout.EAST, lblSpeicherinhalt);
 		layout.putConstraint(SpringLayout.NORTH, lblSp15B, 5, SpringLayout.SOUTH, lblSp14);
-		
-	
-
-
-		
-		
 
 	}
 	
 	public void setStartposition(){
 		Speicheradressen.getInstance().setS500(Integer.parseInt(txtVariableA.getText()));
 		Speicheradressen.getInstance().setS502(Integer.parseInt(txtVariableB.getText()));
-		
-		refresh();
+		Prozessorvariablen.getInstance().setBefehlszaehler(0);
+		Befehlsadressen.getInstance().programmListe();
+		Befehlsadressen.getInstance().setBefehlspointer(100);
 	}
 
-	private void refresh() {
+	public void refresh() {
+		//Befehlshistory nachführen
+		lblBefehlu5.setText(lblBefehlu4.getText());
+		lblBefehlu4.setText(lblBefehlu3.getText());
+		lblBefehlu3.setText(lblBefehlu2.getText());
+		lblBefehlu2.setText(lblBefehlu1.getText());
+		lblBefehlu1.setText(lblAktBefehlI.getText());
+		
+		int pointer = Befehlsadressen.getInstance().getBefehlspointer();
+		lblBefehln1.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 2)));
+		lblBefehln2.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 4)));
+		lblBefehln3.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 6)));
+		lblBefehln4.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 8)));
+		lblBefehln5.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 10)));
+		lblBefehln6.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 12)));
+		lblBefehln7.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 14)));
+		lblBefehln8.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 16)));
+		lblBefehln9.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 18)));
+		lblBefehln10.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 20)));
+		
+		//Labels neu anzeigen:
+		lblBefehlszaehlerI.setText("" + Prozessorvariablen.getInstance().getBefehlszaehler());
+		lblBefehlsRegAdrI.setText("" + Befehlsadressen.getInstance().getBefehlspointer());
+		lblAktBefehlI.setText(Befehlsadressen.getInstance().getAktBefehl(Befehlsadressen.getInstance().getBefehlspointer()));
+		lblAkkuI.setText("" + Prozessorvariablen.getInstance().getAkku());
+		lblReg1I.setText("" + Prozessorvariablen.getInstance().getReg1());
+		lblReg2I.setText("" + Prozessorvariablen.getInstance().getReg2());
+		lblReg3I.setText("" + Prozessorvariablen.getInstance().getReg3());
+		
 		lblSp1.setText("500 + 501: " + Speicheradressen.getInstance().getS500());
 		lblSp2.setText("502 + 503: " + Speicheradressen.getInstance().getS502());
+		lblSp3.setText("504 + 505: " + Speicheradressen.getInstance().getS504());
+		lblSp4.setText("506 + 507: " + Speicheradressen.getInstance().getS506());
+		lblSp5.setText("508 + 509: " + Speicheradressen.getInstance().getS508());
+		lblSp6.setText("510 + 511: " + Speicheradressen.getInstance().getS510());
+		lblSp7.setText("512 + 513: " + Speicheradressen.getInstance().getS512());
+		lblSp8.setText("514 + 515: " + Speicheradressen.getInstance().getS514());
+		lblSp9.setText("516 + 517: " + Speicheradressen.getInstance().getS516());
+		lblSp10.setText("518 + 519: " + Speicheradressen.getInstance().getS518());
+		lblSp11.setText("520 + 521: " + Speicheradressen.getInstance().getS520());
+		lblSp12.setText("522 + 523: " + Speicheradressen.getInstance().getS522());
+		lblSp13.setText("524 + 525: " + Speicheradressen.getInstance().getS524());
+		lblSp14.setText("526 + 527: " + Speicheradressen.getInstance().getS526());
+		lblSp15.setText("528 + 529: " + Speicheradressen.getInstance().getS528());
 		
 	}
 	
 	
 	
+	public void nextStep(){
+		Befehlsadressen.getInstance().nextBefehl();
+		Prozessorvariablen.getInstance().setBefehlszaehler(Prozessorvariablen.getInstance().getBefehlszaehler()+1);
+		
+	}
 	
 	
+	public void popUpEnd(String ergebnis){
+
+		JDialog programmEnde = new JDialog();
+		FlowLayout layout = new FlowLayout();
+		programmEnde.setLayout(layout);
+        programmEnde.setTitle("Ende des Programms");
+        programmEnde.setModal(true);
+        JLabel text = new JLabel("Die Berechnung ist abgeschlossen!");
+        JLabel zaehler = new JLabel("Anzahl Befehlsschritte: " + (Prozessorvariablen.getInstance().getBefehlszaehler()+1));
+        JLabel resultat = new JLabel(ergebnis);
+        programmEnde.add(text);
+        programmEnde.add(resultat);
+        programmEnde.add(zaehler);
+        programmEnde.setBounds(400, 350, 280, 150);
+        programmEnde.setVisible(true);
+	}
 	
 	
 }

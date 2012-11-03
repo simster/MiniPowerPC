@@ -125,7 +125,122 @@ public class Speicheradressen {
 	}
 	
 	
-	
+	public int getAdr(int adr){
+		if(adr==500){
+			return s500;
+		}
+		else if (adr == 502){
+			return s502;
+		}
+		else if (adr == 504){
+			return s504;
+		}
+		else if (adr == 506){
+			return s506;
+		}
+		else if (adr == 508){
+			return s508;
+		}
+		else if (adr == 510){
+			return s510;
+		}
+		else if (adr == 512){
+			return s512;
+		}
+		else if (adr == 514){
+			return s514;
+		}
+		else if (adr == 516){
+			return s516;
+		}
+		else if (adr == 518){
+			return s518;
+		}
+		else if (adr == 520){
+			return s520;
+		}
+		else if (adr == 522){
+			return s522;
+		}
+		else if (adr == 524){
+			return s524;
+		}
+		else if (adr == 526){
+			return s526;
+		}
+		else if (adr == 528){
+			return s528;
+		}
+		
+		return 0;
+	}
 
+	public void setAdr(int adrNr, int adrInhalt){
+		if(adrNr==500){
+			s500 = adrInhalt;
+		}
+		
+		else if (adrNr==502){
+			s502 = adrInhalt;
+		}
+		
+		else if (adrNr==504){
+			s504 = adrInhalt;
+		}
+		
+		else if (adrNr==506){
+			s506 = adrInhalt;
+		}
+		
+		else if (adrNr==508){
+			s508 = adrInhalt;
+		}
+		
+		
+		else if (adrNr==510){
+			s510 = adrInhalt;
+		}
+		
+		
+		else if (adrNr==512){
+			s512 = adrInhalt;
+		}
+		
+		else if (adrNr==514){
+			s514 = adrInhalt;
+		}
+		
+		else if (adrNr==516){
+			s516 = adrInhalt;
+		}
+		
+		else if (adrNr==518){
+			s518 = adrInhalt;
+		}
+		
+		else if (adrNr==520){
+			s520 = adrInhalt;
+		}
+		
+		else if (adrNr==522){
+			s522 = adrInhalt;
+		}
+		
+		else if (adrNr==524){
+			s524 = adrInhalt;
+		}
+		
+		else if (adrNr==526){
+			s526 = adrInhalt;
+		}
+		
+		else if (adrNr==528){
+			s528 = adrInhalt;
+		}
+		
+		else{
+			System.out.println("Fehler - es existieren nur Speicheradressen bis 528");
+		}
+	}
 
 }

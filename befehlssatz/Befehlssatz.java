@@ -1,18 +1,44 @@
 package befehlssatz;
 
+import gui.Prozessor_Gui;
 import variablen.Prozessorvariablen;
+import variablen.Speicheradressen;
 
 public class Befehlssatz {
+
+
+	private static Befehlssatz instance = null;
+
+
+	public static void setInstance(Befehlssatz instance) {
+		Befehlssatz.instance = instance;
+	}
+
+	public static Befehlssatz getInstance() {
+		if (instance == null){
+			instance = new Befehlssatz();
+		}
+		return instance;
+	}
+
 
 	// Lösche das Register «Rxx » (alle Bit auf 0 setzten) und das Carry-Flag
 	// (00 bis 11 für: Akku, R-1, R-2 bzw. R-3).
 
-	public void clr() {
+	public void clr(int regNr) {
 		Prozessorvariablen.getInstance().setCarryflag(0);
-		Prozessorvariablen.getInstance().setAkku(0);
-		Prozessorvariablen.getInstance().setReg1(0);
-		Prozessorvariablen.getInstance().setReg2(0);
-		Prozessorvariablen.getInstance().setReg3(0);
+		if(regNr==0){
+			Prozessorvariablen.getInstance().setAkku(0);
+		}
+		else if(regNr==1){
+			Prozessorvariablen.getInstance().setReg1(0);
+		}
+		else if(regNr==2){
+			Prozessorvariablen.getInstance().setReg2(0);
+		}
+		else if(regNr==3){
+			Prozessorvariablen.getInstance().setReg3(0);
+		}
 
 	}
 
@@ -30,6 +56,15 @@ public class Befehlssatz {
 		} else if (nr == 3) {
 			neuAkku = neuAkku + Prozessorvariablen.getInstance().getReg3();
 		}
+
+		if(neuAkku>32767){
+			Prozessorvariablen.getInstance().setCarryflag(1);
+			neuAkku = neuAkku - 32768;
+		} else if (neuAkku < -32768) {
+			Prozessorvariablen.getInstance().setCarryflag(1);
+			neuAkku = neuAkku + 32768;
+		}
+
 
 		Prozessorvariablen.getInstance().setAkku(neuAkku);
 	}
@@ -73,9 +108,9 @@ public class Befehlssatz {
 		int neuAkku = Prozessorvariablen.getInstance().getAkku();
 		neuAkku = neuAkku - 1;
 
-		if (neuAkku < 32768) {
+		if (neuAkku < -32768) {
 			Prozessorvariablen.getInstance().setCarryflag(1);
-			neuAkku = neuAkku - 1;
+			neuAkku = neuAkku + 32768;
 		}
 		Prozessorvariablen.getInstance().setAkku(neuAkku);
 	}
@@ -84,15 +119,42 @@ public class Befehlssatz {
 	// wird der Inhalt der Speicherzellen Adr und Adr + 1 (1 Wort = 2 Byte)
 	// geladen. Mit 10 Bit können 1KiB Speicher adressiert werden.
 
-	public void lwdd() {
-
+	public void lwdd(int regNr, int adrNr) {
+		if (regNr == 0){
+			Prozessorvariablen.getInstance().setAkku(Speicheradressen.getInstance().getAdr(adrNr));
+		}
+		else if (regNr == 1){
+			Prozessorvariablen.getInstance().setReg1(Speicheradressen.getInstance().getAdr(adrNr));
+		}
+		else if (regNr == 2){
+			Prozessorvariablen.getInstance().setReg2(Speicheradressen.getInstance().getAdr(adrNr));
+		}
+		else {
+			Prozessorvariablen.getInstance().setReg3(Speicheradressen.getInstance().getAdr(adrNr));
+		}
 	}
 
 	// In die über Adr und Adr + 1 adressierten Speicherzellen wird der Inhalt
 	// des Registers xx (00 bis 11 für Akku, R-1, R-2 bzw. R-3) geschrieben. Mit
 	// 10 Bit können 1KiB Speicher adressiert werden.
 
-	public void swdd() {
+	public void swdd(int regNr, int adrNr) {
+		if (regNr == 0){
+			int adrInhalt = Prozessorvariablen.getInstance().getAkku();
+			Speicheradressen.getInstance().setAdr(adrNr, adrInhalt);
+		}
+		else if (regNr == 1){
+			int adrInhalt = Prozessorvariablen.getInstance().getReg1();
+			Speicheradressen.getInstance().setAdr(adrNr, adrInhalt);
+		}
+		else if (regNr == 2){
+			int adrInhalt = Prozessorvariablen.getInstance().getReg2();
+			Speicheradressen.getInstance().setAdr(adrNr, adrInhalt);
+		}
+		else {
+			int adrInhalt = Prozessorvariablen.getInstance().getReg3();
+			Speicheradressen.getInstance().setAdr(adrNr, adrInhalt);
+		}
 
 	}
 
@@ -116,6 +178,13 @@ public class Befehlssatz {
 	public void sla() {
 		int neuAkku = Prozessorvariablen.getInstance().getAkku();
 		neuAkku = neuAkku * 2;
+		if (neuAkku > 32767) {
+			Prozessorvariablen.getInstance().setCarryflag(1);
+			neuAkku = neuAkku - 32768;
+		} else if (neuAkku < -32768) {
+			Prozessorvariablen.getInstance().setCarryflag(1);
+			neuAkku = neuAkku + 32768;
+		}
 		Prozessorvariablen.getInstance().setAkku(neuAkku);
 	}
 
@@ -126,9 +195,11 @@ public class Befehlssatz {
 
 	public void srl() {
 		int neuAkku = Prozessorvariablen.getInstance().getAkku();
+		if(neuAkku < 0){
+			neuAkku = neuAkku + 32768;
+		}
 		neuAkku = neuAkku / 2;
 		Prozessorvariablen.getInstance().setAkku(neuAkku);
-
 	}
 
 	// Schieben logisch nach links: der Inhalt des Akkus wird um eine Stelle
@@ -138,18 +209,18 @@ public class Befehlssatz {
 
 	public void sll() {
 		int neuAkku = Prozessorvariablen.getInstance().getAkku();
-
 		neuAkku = neuAkku * 2;
-		if (neuAkku > 32767) {
+		if(neuAkku<0){
 			Prozessorvariablen.getInstance().setCarryflag(1);
-			neuAkku = neuAkku - 32768;
-		} else if (neuAkku < 32768) {
-			Prozessorvariablen.getInstance().setCarryflag(1);
-			neuAkku = neuAkku + 32768;
+			neuAkku=neuAkku * -1;
 		}
-
+		if (neuAkku > 32767) {
+			neuAkku = neuAkku - 32768;
+		}
 		Prozessorvariablen.getInstance().setAkku(neuAkku);
 	}
+
+
 
 	// Akku und Register xx (00 bis 11 für Akku, R-1, R-2 bzw R-3) werden
 	// bitweise logisch mit AND verknüpft
@@ -223,11 +294,12 @@ public class Befehlssatz {
 	// Speicheradresse; sonst wird das Programm mit dem folgenden Befehl
 	// fortgesetzt. Mit 10 Bit können 1KiB Speicher adressiert werden.
 
-	public void bzd() {
+	public boolean bzd() {
 		int neuAkku = Prozessorvariablen.getInstance().getAkku();
 		if (neuAkku == 0) {
-
+			return true;
 		}
+		return false;
 	}
 
 	// Wenn der Akku ≠ 0 ist, verzweige an die durch den Operanden angegebene
@@ -245,22 +317,32 @@ public class Befehlssatz {
 	// angegebene Speicheradresse; sonst wird das Programm mit dem folgenden
 	// Befehl forgesetzt. Mit 10 Bit können 1KiB Speicher adressiert werden.
 
-	public void bcd() {
-		int carryFlag = Prozessorvariablen.getInstance().getCarryflag();
-		if (carryFlag == 1) {
-
+	public boolean bcd() {
+		if (Prozessorvariablen.getInstance().getCarryflag() == 1) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 
 	// Verzweige an die durch den Operanden angegebene Speicheradresse. Mit 10
 	// Bit können 1KiB Speicher adressiert werden.
 
-	public void bd() {
-
+	public int bd(int pointer) {
+		return pointer;
 	}
 
 	public void end() {
+		String ergebnis;
+		if(Speicheradressen.getInstance().getS508()==0){
+        	ergebnis = "Das Resultat lautet: "+Speicheradressen.getInstance().getS510();
+        }
+		else {
+			ergebnis = "Das Reslutat lautet: "+Speicheradressen.getInstance().getS508() + Speicheradressen.getInstance().getS510();
+		}
 		System.out.println("ENDE");
+		Prozessor_Gui.getInstance().popUpEnd(ergebnis);
 	}
 
 }
