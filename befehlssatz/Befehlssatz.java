@@ -92,10 +92,7 @@ public class Befehlssatz {
 		neuAkku = neuAkku + 1;
 		if (neuAkku > 32767) {
 			Prozessorvariablen.getInstance().setCarryflag(1);
-			neuAkku = neuAkku - 1;
-		} else if (neuAkku < 32768) {
-			Prozessorvariablen.getInstance().setCarryflag(1);
-			neuAkku = neuAkku + 1;
+			neuAkku = neuAkku - 32768;
 		}
 		Prozessorvariablen.getInstance().setAkku(neuAkku);
 	}
@@ -339,7 +336,8 @@ public class Befehlssatz {
         	ergebnis = "Das Resultat lautet: "+Speicheradressen.getInstance().getS510();
         }
 		else {
-			ergebnis = "Das Reslutat lautet: "+Speicheradressen.getInstance().getS508() + Speicheradressen.getInstance().getS510();
+			int ergebnisGross = (Speicheradressen.getInstance().getS508() * 32768) + Speicheradressen.getInstance().getS510();
+			ergebnis = "Das Reslutat lautet: "+ ergebnisGross;
 		}
 		System.out.println("ENDE");
 		Prozessor_Gui.getInstance().popUpEnd(ergebnis);
