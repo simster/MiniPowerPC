@@ -15,9 +15,9 @@ import variablen.Prozessorvariablen;
 import variablen.Speicheradressen;
 
 public class Prozessor_Gui extends JPanel{
-	
+
 	private static Prozessor_Gui instance = null;
-	
+
 	private static final long serialVersionUID = 1L;
 	private JLabel lblZehner = new JLabel("10er-System");
 	private JLabel lblBinaer = new JLabel("2er-System");
@@ -25,39 +25,39 @@ public class Prozessor_Gui extends JPanel{
 	private JLabel lblBefehlszaehler;
 	private JLabel lblBefehlsRegAdr;
 	private JLabel lblAktBefehl;	
-	
+
 	private JLabel lblBefehlszaehlerI;
 	private JLabel lblBefehlsRegAdrI;
 	private JLabel lblAktBefehlI;
-	
-	
+
+
 	private JLabel lblAkku;
 	private JLabel lblReg1;
 	private JLabel lblReg2;
 	private JLabel lblReg3;
-	
+
 	private JLabel lblAkkuI;
 	private JLabel lblReg1I;
 	private JLabel lblReg2I;
 	private JLabel lblReg3I;	
-	
+
 	private JLabel lblAkkuIB;
 	private JLabel lblReg1IB;
 	private JLabel lblReg2IB;
 	private JLabel lblReg3IB;	
-	
+
 	private JLabel lblcarryflag;
 	private JLabel lblcarryflagI;
-	
+
 	private JLabel lblBefehlVor;
 	private JLabel lblBefehlu5 = new JLabel("---");
 	private JLabel lblBefehlu4 = new JLabel("---");
 	private JLabel lblBefehlu3 = new JLabel("---");
 	private JLabel lblBefehlu2 = new JLabel("---");
 	private JLabel lblBefehlu1 = new JLabel("---");
-	
+
 	private JLabel lblBefehlNach;
-	
+
 	private JLabel lblBefehln1;
 	private JLabel lblBefehln2;
 	private JLabel lblBefehln3;
@@ -68,10 +68,10 @@ public class Prozessor_Gui extends JPanel{
 	private JLabel lblBefehln8;
 	private JLabel lblBefehln9;
 	private JLabel lblBefehln10;
-	
-	
+
+
 	private JLabel lblSpeicherinhalt;
-	
+
 	private JLabel lblSp1;
 	private JLabel lblSp2;
 	private JLabel lblSp3;
@@ -87,7 +87,7 @@ public class Prozessor_Gui extends JPanel{
 	private JLabel lblSp13;
 	private JLabel lblSp14;
 	private JLabel lblSp15;
-	
+
 	private JLabel lblSp1B;
 	private JLabel lblSp2B;
 	private JLabel lblSp3B;
@@ -103,18 +103,18 @@ public class Prozessor_Gui extends JPanel{
 	private JLabel lblSp13B;
 	private JLabel lblSp14B;
 	private JLabel lblSp15B;
-	
+
 	private JLabel lblVariableA;
 	private JLabel lblVariableB;
 	private JTextField txtVariableA;
 	private JTextField txtVariableB;
-	
-	
-	
+
+
+
 	public static void setInstance(Prozessor_Gui instance) {
 		Prozessor_Gui.instance = instance;
 	}
-	
+
 	public static Prozessor_Gui getInstance() {
 		if (instance == null){
 			instance = new Prozessor_Gui();
@@ -122,9 +122,9 @@ public class Prozessor_Gui extends JPanel{
 		return instance;
 	}
 
-	
-	
-	
+
+
+
 	public Prozessor_Gui(){
 
 		SpringLayout layout = new SpringLayout();
@@ -139,8 +139,8 @@ public class Prozessor_Gui extends JPanel{
 
 			}
 		});
-		
-		
+
+
 		JButton btnStep = new JButton("Step");
 		btnStep.addActionListener(new ActionListener() {
 			@Override
@@ -149,18 +149,17 @@ public class Prozessor_Gui extends JPanel{
 				refresh();
 			}
 		});
-		
-		
+
+
 		JButton btnSlow = new JButton("Slow-Modus");
 		btnSlow.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hallo3");
-
+			public void actionPerformed(ActionEvent e) {	
+				slowRun();
 			}
 		});
-		
-		
+
+
 		JButton btnFast = new JButton("Fast-Modus");
 		btnFast.addActionListener(new ActionListener() {
 			@Override
@@ -170,7 +169,16 @@ public class Prozessor_Gui extends JPanel{
 			}
 		});
 
-		
+
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bereinigen();
+			}
+		});
+
+
 		//Texte für Labels setzen:
 		lblBefehlszaehler = new JLabel("Befehlszähler:");
 		lblBefehlszaehlerI = new JLabel("" + Prozessorvariablen.getInstance().getBefehlszaehler());
@@ -194,16 +202,16 @@ public class Prozessor_Gui extends JPanel{
 		lblcarryflagI = new JLabel("" + Prozessorvariablen.getInstance().getCarryflag());
 		lblBefehlVor = new JLabel("Befehle vorher:");
 		lblBefehlNach = new JLabel("Befehle nachher:");
-		lblBefehln1 = new JLabel("todo");
-		lblBefehln2 = new JLabel("todo");
-		lblBefehln3 = new JLabel("todo");
-		lblBefehln4 = new JLabel("todo");
-		lblBefehln5 = new JLabel("todo");
-		lblBefehln6 = new JLabel("todo");
-		lblBefehln7 = new JLabel("todo");
-		lblBefehln8 = new JLabel("todo");
-		lblBefehln9 = new JLabel("todo");
-		lblBefehln10 = new JLabel("todo");
+		lblBefehln1 = new JLabel("---");
+		lblBefehln2 = new JLabel("---");
+		lblBefehln3 = new JLabel("---");
+		lblBefehln4 = new JLabel("---");
+		lblBefehln5 = new JLabel("---");
+		lblBefehln6 = new JLabel("---");
+		lblBefehln7 = new JLabel("---");
+		lblBefehln8 = new JLabel("---");
+		lblBefehln9 = new JLabel("---");
+		lblBefehln10 = new JLabel("---");
 		lblSpeicherinhalt = new JLabel("Speicherinhalt:");
 		lblSp1 = new JLabel("500 + 501: " + Speicheradressen.getInstance().getS500());
 		lblSp2 = new JLabel("502 + 503: " + Speicheradressen.getInstance().getS502());
@@ -235,21 +243,21 @@ public class Prozessor_Gui extends JPanel{
 		lblSp13B = new JLabel("todo");
 		lblSp14B = new JLabel("todo");
 		lblSp15B = new JLabel("todo");
-		
+
 		lblVariableA = new JLabel("Variable a: ");
 		lblVariableB = new JLabel("Variable b: ");
 		txtVariableA = new JTextField(5);
 		txtVariableA.setHorizontalAlignment(JTextField.RIGHT);
 		txtVariableB = new JTextField(5);
 		txtVariableB.setHorizontalAlignment(JTextField.RIGHT);
-		
+
 		lblVariableA.setLabelFor(txtVariableA);
 		lblVariableB.setLabelFor(txtVariableB);
-		
-		
-		
+
+
+
 		//label.setFont(label.getFont().deriveFont(Font.BOLD));
-		
+
 		//Labels dem GUI hinzufügen:
 		this.add(lblZehner);
 		this.add(lblBinaer);
@@ -329,14 +337,15 @@ public class Prozessor_Gui extends JPanel{
 		this.add(btnStep);
 		this.add(btnSlow);
 		this.add(btnFast);
-		
-		
-		
+		this.add(btnClear);
+
+
+
 		//Labels im GUI platzieren
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblVariableA, 5, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblVariableA, 10, SpringLayout.NORTH, this);
-		
+
 		layout.putConstraint(SpringLayout.WEST, btnStart, 200, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, btnStart, 6, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, btnStep, 350, SpringLayout.WEST, this);
@@ -345,23 +354,23 @@ public class Prozessor_Gui extends JPanel{
 		layout.putConstraint(SpringLayout.NORTH, btnSlow, 6, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, btnFast, 600, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, btnFast, 6, SpringLayout.NORTH, this);
-		
+
 		layout.putConstraint(SpringLayout.WEST, txtVariableA, 5, SpringLayout.EAST, lblVariableA);
 		layout.putConstraint(SpringLayout.NORTH, txtVariableA, 8, SpringLayout.NORTH, this);
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblVariableB, 5, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblVariableB, 12, SpringLayout.SOUTH, lblVariableA);
-		
+
 		layout.putConstraint(SpringLayout.WEST, txtVariableB, 5, SpringLayout.EAST, lblVariableA);
 		layout.putConstraint(SpringLayout.NORTH, txtVariableB, 10, SpringLayout.SOUTH, lblVariableA);
-		
-		
+
+
 		layout.putConstraint(SpringLayout.WEST, lblZehner, 5, SpringLayout.EAST, lblReg1);
 		layout.putConstraint(SpringLayout.NORTH, lblZehner, 120, SpringLayout.NORTH, this);
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblBinaer, 90, SpringLayout.EAST, lblReg1);
 		layout.putConstraint(SpringLayout.NORTH, lblBinaer, 120, SpringLayout.NORTH, this);
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblBefehlszaehler, 360, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblBefehlszaehler, 6, SpringLayout.SOUTH, lblZehner);
 		layout.putConstraint(SpringLayout.WEST, lblBefehlszaehlerI, 7, SpringLayout.EAST, lblBefehlsRegAdr);
@@ -371,44 +380,44 @@ public class Prozessor_Gui extends JPanel{
 		layout.putConstraint(SpringLayout.NORTH, lblBefehlsRegAdr, 8, SpringLayout.SOUTH, lblBefehlszaehler);
 		layout.putConstraint(SpringLayout.WEST, lblBefehlsRegAdrI, 7, SpringLayout.EAST, lblBefehlsRegAdr);
 		layout.putConstraint(SpringLayout.NORTH, lblBefehlsRegAdrI, 8, SpringLayout.SOUTH, lblBefehlszaehler);
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblAkku, 5, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblAkku, 6, SpringLayout.SOUTH, lblZehner);
 		layout.putConstraint(SpringLayout.WEST, lblAkkuI, 6, SpringLayout.EAST, lblReg1);
 		layout.putConstraint(SpringLayout.NORTH, lblAkkuI, 6, SpringLayout.SOUTH, lblZehner);
 		layout.putConstraint(SpringLayout.WEST, lblAkkuIB, 90, SpringLayout.EAST, lblReg1);
 		layout.putConstraint(SpringLayout.NORTH, lblAkkuIB, 6, SpringLayout.SOUTH, lblZehner);
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblReg1, 5, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblReg1, 6, SpringLayout.SOUTH, lblAkku);
 		layout.putConstraint(SpringLayout.WEST, lblReg1I, 5, SpringLayout.EAST, lblReg1);
 		layout.putConstraint(SpringLayout.NORTH, lblReg1I, 6, SpringLayout.SOUTH, lblAkku);
 		layout.putConstraint(SpringLayout.WEST, lblReg1IB, 90, SpringLayout.EAST, lblReg1);
 		layout.putConstraint(SpringLayout.NORTH, lblReg1IB, 6, SpringLayout.SOUTH, lblAkku);
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblReg2, 5, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblReg2, 6, SpringLayout.SOUTH, lblReg1);
 		layout.putConstraint(SpringLayout.WEST, lblReg2I, 5, SpringLayout.EAST, lblReg1);
 		layout.putConstraint(SpringLayout.NORTH, lblReg2I, 6, SpringLayout.SOUTH, lblReg1);
 		layout.putConstraint(SpringLayout.WEST, lblReg2IB, 90, SpringLayout.EAST, lblReg1);
 		layout.putConstraint(SpringLayout.NORTH, lblReg2IB, 6, SpringLayout.SOUTH, lblReg1);
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblReg3, 5, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblReg3, 6, SpringLayout.SOUTH, lblReg2);
 		layout.putConstraint(SpringLayout.WEST, lblReg3I, 5, SpringLayout.EAST, lblReg1);
 		layout.putConstraint(SpringLayout.NORTH, lblReg3I, 6, SpringLayout.SOUTH, lblReg2);
 		layout.putConstraint(SpringLayout.WEST, lblReg3IB, 90, SpringLayout.EAST, lblReg1);
 		layout.putConstraint(SpringLayout.NORTH, lblReg3IB, 6, SpringLayout.SOUTH, lblReg2);
-				
+
 		layout.putConstraint(SpringLayout.WEST, lblcarryflag, 5, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblcarryflag, 16, SpringLayout.SOUTH, lblReg3);
 		layout.putConstraint(SpringLayout.WEST, lblcarryflagI, 5, SpringLayout.EAST, lblReg1);
 		layout.putConstraint(SpringLayout.NORTH, lblcarryflagI, 16, SpringLayout.SOUTH, lblReg3);
-		
+
 		//ganze Befehlsliste mit den dazugehörigen Labels
 		layout.putConstraint(SpringLayout.WEST, lblBefehlVor, 5, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblBefehlVor, 32, SpringLayout.SOUTH, lblcarryflag);
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblBefehlu5, 7, SpringLayout.EAST, lblAktBefehl);
 		layout.putConstraint(SpringLayout.NORTH, lblBefehlu5, 32, SpringLayout.SOUTH, lblcarryflag);
 		layout.putConstraint(SpringLayout.WEST, lblBefehlu4, 7, SpringLayout.EAST, lblAktBefehl);
@@ -419,15 +428,15 @@ public class Prozessor_Gui extends JPanel{
 		layout.putConstraint(SpringLayout.NORTH, lblBefehlu2, 5, SpringLayout.SOUTH, lblBefehlu3);
 		layout.putConstraint(SpringLayout.WEST, lblBefehlu1, 7, SpringLayout.EAST, lblAktBefehl);
 		layout.putConstraint(SpringLayout.NORTH, lblBefehlu1, 5, SpringLayout.SOUTH, lblBefehlu2);
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblAktBefehl, 7, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblAktBefehl, 5, SpringLayout.SOUTH, lblBefehlu1);
 		layout.putConstraint(SpringLayout.WEST, lblAktBefehlI, 7, SpringLayout.EAST, lblAktBefehl);
 		layout.putConstraint(SpringLayout.NORTH, lblAktBefehlI, 5, SpringLayout.SOUTH, lblBefehlu1);
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblBefehlNach, 5, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblBefehlNach, 5, SpringLayout.SOUTH, lblAktBefehl);
-		
+
 		layout.putConstraint(SpringLayout.WEST, lblBefehln1, 7, SpringLayout.EAST, lblAktBefehl);
 		layout.putConstraint(SpringLayout.NORTH, lblBefehln1, 5, SpringLayout.SOUTH, lblAktBefehl);
 		layout.putConstraint(SpringLayout.WEST, lblBefehln2, 7, SpringLayout.EAST, lblAktBefehl);
@@ -448,8 +457,8 @@ public class Prozessor_Gui extends JPanel{
 		layout.putConstraint(SpringLayout.NORTH, lblBefehln9, 5, SpringLayout.SOUTH, lblBefehln8);
 		layout.putConstraint(SpringLayout.WEST, lblBefehln10, 7, SpringLayout.EAST, lblAktBefehl);
 		layout.putConstraint(SpringLayout.NORTH, lblBefehln10, 5, SpringLayout.SOUTH, lblBefehln9);
-		
-		
+
+
 		layout.putConstraint(SpringLayout.WEST, lblSpeicherinhalt, 360, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, lblSpeicherinhalt, 32, SpringLayout.SOUTH, lblcarryflag);
 		layout.putConstraint(SpringLayout.WEST, lblSp1, 7, SpringLayout.EAST, lblSpeicherinhalt);
@@ -513,8 +522,11 @@ public class Prozessor_Gui extends JPanel{
 		layout.putConstraint(SpringLayout.WEST, lblSp15B, 150, SpringLayout.EAST, lblSpeicherinhalt);
 		layout.putConstraint(SpringLayout.NORTH, lblSp15B, 5, SpringLayout.SOUTH, lblSp14);
 
+		layout.putConstraint(SpringLayout.EAST, btnClear, -5, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.SOUTH, btnClear, -5, SpringLayout.SOUTH, this);
+
 	}
-	
+
 	public void setStartposition(){
 		Speicheradressen.getInstance().setS500(Integer.parseInt(txtVariableA.getText()));
 		Speicheradressen.getInstance().setS502(Integer.parseInt(txtVariableB.getText()));
@@ -530,7 +542,7 @@ public class Prozessor_Gui extends JPanel{
 		lblBefehlu3.setText(lblBefehlu2.getText());
 		lblBefehlu2.setText(lblBefehlu1.getText());
 		lblBefehlu1.setText(lblAktBefehlI.getText());
-		
+
 		int pointer = Befehlsadressen.getInstance().getBefehlspointer();
 		lblBefehln1.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 2)));
 		lblBefehln2.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 4)));
@@ -542,7 +554,7 @@ public class Prozessor_Gui extends JPanel{
 		lblBefehln8.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 16)));
 		lblBefehln9.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 18)));
 		lblBefehln10.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 20)));
-		
+
 		//Labels neu anzeigen:
 		lblBefehlszaehlerI.setText("" + Prozessorvariablen.getInstance().getBefehlszaehler());
 		lblBefehlsRegAdrI.setText("" + Befehlsadressen.getInstance().getBefehlspointer());
@@ -551,7 +563,8 @@ public class Prozessor_Gui extends JPanel{
 		lblReg1I.setText("" + Prozessorvariablen.getInstance().getReg1());
 		lblReg2I.setText("" + Prozessorvariablen.getInstance().getReg2());
 		lblReg3I.setText("" + Prozessorvariablen.getInstance().getReg3());
-		
+		lblcarryflagI.setText("" + Prozessorvariablen.getInstance().getCarryflag());
+
 		lblSp1.setText("500 + 501: " + Speicheradressen.getInstance().getS500());
 		lblSp2.setText("502 + 503: " + Speicheradressen.getInstance().getS502());
 		lblSp3.setText("504 + 505: " + Speicheradressen.getInstance().getS504());
@@ -567,40 +580,175 @@ public class Prozessor_Gui extends JPanel{
 		lblSp13.setText("524 + 525: " + Speicheradressen.getInstance().getS524());
 		lblSp14.setText("526 + 527: " + Speicheradressen.getInstance().getS526());
 		lblSp15.setText("528 + 529: " + Speicheradressen.getInstance().getS528());
-		
+
+		lblSp1B.setText(dezimalToBinary(Speicheradressen.getInstance().getS500()));
+		lblSp2B.setText(dezimalToBinary(Speicheradressen.getInstance().getS502()));
+		lblSp3B.setText("" + dezimalToBinary(Speicheradressen.getInstance().getS504()));
+		lblSp4B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS506()));
+		lblSp5B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS508()));
+		lblSp6B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS510()));
+		lblSp7B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS512()));
+		lblSp8B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS514()));
+		lblSp9B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS516()));
+		lblSp10B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS518()));
+		lblSp11B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS520()));
+		lblSp12B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS522()));
+		lblSp13B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS524()));
+		lblSp14B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS526()));
+		lblSp15B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS528()));
+
+
+
+
+
+
 	}
-	
-	
-	
+
+
+
 	public void nextStep(){
 		Befehlsadressen.getInstance().nextBefehl();
 		Prozessorvariablen.getInstance().setBefehlszaehler(Prozessorvariablen.getInstance().getBefehlszaehler()+1);
-		
+
 	}
-	
-	
+
+
 	public void popUpEnd(String ergebnis){
 
 		JDialog programmEnde = new JDialog();
 		FlowLayout layout = new FlowLayout();
 		programmEnde.setLayout(layout);
-        programmEnde.setTitle("Ende des Programms");
-        programmEnde.setModal(true);
-        JLabel text = new JLabel("Die Berechnung ist abgeschlossen!");
-        JLabel zaehler = new JLabel("Anzahl Befehlsschritte: " + (Prozessorvariablen.getInstance().getBefehlszaehler()+1));
-        JLabel resultat = new JLabel(ergebnis);
-        programmEnde.add(text);
-        programmEnde.add(resultat);
-        programmEnde.add(zaehler);
-        programmEnde.setBounds(400, 350, 280, 150);
-        programmEnde.setVisible(true);
+		programmEnde.setTitle("Ende des Programms");
+		programmEnde.setModal(true);
+		JLabel text = new JLabel("Die Berechnung ist abgeschlossen!");
+		JLabel zaehler = new JLabel("Anzahl Befehlsschritte: " + (Prozessorvariablen.getInstance().getBefehlszaehler()+1));
+		JLabel resultat = new JLabel(ergebnis);
+		programmEnde.add(text);
+		programmEnde.add(resultat);
+		programmEnde.add(zaehler);
+		programmEnde.setBounds(400, 350, 280, 150);
+		programmEnde.setVisible(true);
 	}
-	
+
 	public void fastRun(){
 		while(Befehlsadressen.getInstance().getBefehlspointer()!=148){
 			nextStep();
 		}
 		nextStep();
 	}
-	
+
+
+
+	public void slowRun(){
+		while(Befehlsadressen.getInstance().getBefehlspointer()!=148){
+			nextStep();
+			refresh();	
+		}
+		pause();
+	}
+
+
+	public void pause() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println("oops");
+		}
+	}
+
+	public void bereinigen(){
+		Prozessorvariablen.getInstance().setAkku(0);
+		Prozessorvariablen.getInstance().setReg1(0);
+		Prozessorvariablen.getInstance().setReg2(0);
+		Prozessorvariablen.getInstance().setReg3(0);
+		Prozessorvariablen.getInstance().setCarryflag(0);
+
+		Speicheradressen.getInstance().setS500(0);
+		Speicheradressen.getInstance().setS502(0);
+		Speicheradressen.getInstance().setS504(0);
+		Speicheradressen.getInstance().setS506(0);
+		Speicheradressen.getInstance().setS508(0);
+		Speicheradressen.getInstance().setS510(0);
+		Speicheradressen.getInstance().setS512(0);
+		Speicheradressen.getInstance().setS514(0);
+		Speicheradressen.getInstance().setS516(0);
+		Speicheradressen.getInstance().setS518(0);
+		Speicheradressen.getInstance().setS520(0);
+		Speicheradressen.getInstance().setS522(0);
+		Speicheradressen.getInstance().setS524(0);
+		Speicheradressen.getInstance().setS526(0);
+		Speicheradressen.getInstance().setS528(0);
+
+		txtVariableA.setText("");
+		txtVariableB.setText("");
+
+		lblBefehlu5.setText("---");
+		lblBefehlu4.setText("---");
+		lblBefehlu3.setText("---");
+		lblBefehlu2.setText("---");
+		lblBefehlu1.setText("---");
+
+		lblBefehln1.setText("---");
+		lblBefehln2.setText("---");
+		lblBefehln3.setText("---");
+		lblBefehln4.setText("---");
+		lblBefehln5.setText("---");
+		lblBefehln6.setText("---");
+		lblBefehln7.setText("---");
+		lblBefehln8.setText("---");
+		lblBefehln9.setText("---");
+		lblBefehln10.setText("---");
+
+		//Labels neu anzeigen:
+		lblBefehlszaehlerI.setText("0");
+		lblBefehlsRegAdrI.setText("0");
+		lblAktBefehlI.setText("---");
+		lblAkkuI.setText("" + Prozessorvariablen.getInstance().getAkku());
+		lblReg1I.setText("" + Prozessorvariablen.getInstance().getReg1());
+		lblReg2I.setText("" + Prozessorvariablen.getInstance().getReg2());
+		lblReg3I.setText("" + Prozessorvariablen.getInstance().getReg3());
+		lblcarryflagI.setText("" + Prozessorvariablen.getInstance().getCarryflag());
+
+		lblSp1.setText("500 + 501: " + Speicheradressen.getInstance().getS500());
+		lblSp2.setText("502 + 503: " + Speicheradressen.getInstance().getS502());
+		lblSp3.setText("504 + 505: " + Speicheradressen.getInstance().getS504());
+		lblSp4.setText("506 + 507: " + Speicheradressen.getInstance().getS506());
+		lblSp5.setText("508 + 509: " + Speicheradressen.getInstance().getS508());
+		lblSp6.setText("510 + 511: " + Speicheradressen.getInstance().getS510());
+		lblSp7.setText("512 + 513: " + Speicheradressen.getInstance().getS512());
+		lblSp8.setText("514 + 515: " + Speicheradressen.getInstance().getS514());
+		lblSp9.setText("516 + 517: " + Speicheradressen.getInstance().getS516());
+		lblSp10.setText("518 + 519: " + Speicheradressen.getInstance().getS518());
+		lblSp11.setText("520 + 521: " + Speicheradressen.getInstance().getS520());
+		lblSp12.setText("522 + 523: " + Speicheradressen.getInstance().getS522());
+		lblSp13.setText("524 + 525: " + Speicheradressen.getInstance().getS524());
+		lblSp14.setText("526 + 527: " + Speicheradressen.getInstance().getS526());
+		lblSp15.setText("528 + 529: " + Speicheradressen.getInstance().getS528());
+	}
+
+
+	public String dezimalToBinary(int a) {
+		String binZahl="";
+
+		if(a>=0){
+			int z = 0;
+			int[] bin = new int[16];
+			for(int i = 0; i<16; i++){
+				bin[i]= 0;
+			}
+			while (a > 0) {
+
+				int b = a % 2;
+				a = a / 2;
+				bin[z] = b;
+				z = z + 1;
+			}
+			for (int i = bin.length-1 ; i >= 0; i--) {
+
+				binZahl=binZahl+bin[i];
+			}
+		}
+
+		return binZahl;
+	}
 }
