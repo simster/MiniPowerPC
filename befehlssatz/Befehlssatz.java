@@ -193,7 +193,7 @@ public class Befehlssatz {
 	public void srl() {
 		int neuAkku = Prozessorvariablen.getInstance().getAkku();
 		if(neuAkku < 0){
-			neuAkku = neuAkku + 32768;
+			neuAkku = neuAkku + (2* 32768);
 		}
 		neuAkku = neuAkku / 2;
 		Prozessorvariablen.getInstance().setAkku(neuAkku);
@@ -213,6 +213,7 @@ public class Befehlssatz {
 		}
 		if (neuAkku > 32767) {
 			neuAkku = neuAkku - 32768;
+			neuAkku = -32768 + neuAkku;
 		}
 		Prozessorvariablen.getInstance().setAkku(neuAkku);
 	}

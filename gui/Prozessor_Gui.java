@@ -1,14 +1,11 @@
 package gui;
 
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
@@ -148,7 +145,6 @@ public class Prozessor_Gui extends JPanel{
 		btnStep.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				nextStep();
 				refresh();
 			}
@@ -169,8 +165,8 @@ public class Prozessor_Gui extends JPanel{
 		btnFast.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hallo4");
-
+				fastRun();
+				refresh();
 			}
 		});
 
@@ -600,5 +596,11 @@ public class Prozessor_Gui extends JPanel{
         programmEnde.setVisible(true);
 	}
 	
+	public void fastRun(){
+		while(Befehlsadressen.getInstance().getBefehlspointer()!=148){
+			nextStep();
+		}
+		nextStep();
+	}
 	
 }
