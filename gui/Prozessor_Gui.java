@@ -583,22 +583,25 @@ public class Prozessor_Gui extends JPanel{
 
 		lblSp1B.setText(dezimalToBinary(Speicheradressen.getInstance().getS500()));
 		lblSp2B.setText(dezimalToBinary(Speicheradressen.getInstance().getS502()));
-		lblSp3B.setText("" + dezimalToBinary(Speicheradressen.getInstance().getS504()));
-		lblSp4B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS506()));
-		lblSp5B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS508()));
-		lblSp6B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS510()));
-		lblSp7B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS512()));
-		lblSp8B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS514()));
-		lblSp9B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS516()));
-		lblSp10B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS518()));
-		lblSp11B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS520()));
-		lblSp12B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS522()));
-		lblSp13B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS524()));
-		lblSp14B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS526()));
-		lblSp15B.setText("" + Integer.toBinaryString(Speicheradressen.getInstance().getS528()));
+		lblSp3B.setText(dezimalToBinary(Speicheradressen.getInstance().getS504()));
+		lblSp4B.setText(dezimalToBinary(Speicheradressen.getInstance().getS506()));
+		lblSp5B.setText(dezimalToBinary(Speicheradressen.getInstance().getS508()));
+		lblSp6B.setText(dezimalToBinary(Speicheradressen.getInstance().getS510()));
+		lblSp7B.setText(dezimalToBinary(Speicheradressen.getInstance().getS512()));
+		lblSp8B.setText(dezimalToBinary(Speicheradressen.getInstance().getS514()));
+		lblSp9B.setText(dezimalToBinary(Speicheradressen.getInstance().getS516()));
+		lblSp10B.setText(dezimalToBinary(Speicheradressen.getInstance().getS518()));
+		lblSp11B.setText(dezimalToBinary(Speicheradressen.getInstance().getS520()));
+		lblSp12B.setText(dezimalToBinary(Speicheradressen.getInstance().getS522()));
+		lblSp13B.setText(dezimalToBinary(Speicheradressen.getInstance().getS524()));
+		lblSp14B.setText(dezimalToBinary(Speicheradressen.getInstance().getS526()));
+		lblSp15B.setText(dezimalToBinary(Speicheradressen.getInstance().getS528()));
 
-
-
+		lblAkkuIB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getAkku()));
+		lblReg1IB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getReg1()));
+		lblReg2IB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getReg2()));
+		lblReg3IB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getReg3()));
+		
 
 
 
@@ -724,6 +727,27 @@ public class Prozessor_Gui extends JPanel{
 		lblSp13.setText("524 + 525: " + Speicheradressen.getInstance().getS524());
 		lblSp14.setText("526 + 527: " + Speicheradressen.getInstance().getS526());
 		lblSp15.setText("528 + 529: " + Speicheradressen.getInstance().getS528());
+		
+		lblSp1B.setText(dezimalToBinary(Speicheradressen.getInstance().getS500()));
+		lblSp2B.setText(dezimalToBinary(Speicheradressen.getInstance().getS502()));
+		lblSp3B.setText(dezimalToBinary(Speicheradressen.getInstance().getS504()));
+		lblSp4B.setText(dezimalToBinary(Speicheradressen.getInstance().getS506()));
+		lblSp5B.setText(dezimalToBinary(Speicheradressen.getInstance().getS508()));
+		lblSp6B.setText(dezimalToBinary(Speicheradressen.getInstance().getS510()));
+		lblSp7B.setText(dezimalToBinary(Speicheradressen.getInstance().getS512()));
+		lblSp8B.setText(dezimalToBinary(Speicheradressen.getInstance().getS514()));
+		lblSp9B.setText(dezimalToBinary(Speicheradressen.getInstance().getS516()));
+		lblSp10B.setText(dezimalToBinary(Speicheradressen.getInstance().getS518()));
+		lblSp11B.setText(dezimalToBinary(Speicheradressen.getInstance().getS520()));
+		lblSp12B.setText(dezimalToBinary(Speicheradressen.getInstance().getS522()));
+		lblSp13B.setText(dezimalToBinary(Speicheradressen.getInstance().getS524()));
+		lblSp14B.setText(dezimalToBinary(Speicheradressen.getInstance().getS526()));
+		lblSp15B.setText(dezimalToBinary(Speicheradressen.getInstance().getS528()));
+		
+		lblAkkuIB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getAkku()));
+		lblReg1IB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getReg1()));
+		lblReg2IB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getReg2()));
+		lblReg3IB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getReg3()));
 	}
 
 
@@ -747,6 +771,33 @@ public class Prozessor_Gui extends JPanel{
 
 				binZahl=binZahl+bin[i];
 			}
+		} else{
+			a = (a*-1)-1;
+			int z = 0;
+			int[] bin = new int[16];
+			for(int i = 0; i<16; i++){
+				bin[i]= 0;
+			}
+			while (a > 0) {
+
+				int b = a % 2;
+				a = a / 2;
+				bin[z] = b;
+				z = z + 1;
+			}
+			for (int i = 0; i<16; i++){
+				if(bin[i]==0){
+					bin[i]=1;
+				}
+				else{
+					bin[i]=0;
+				}
+			}
+			for (int i = bin.length-1 ; i >= 0; i--) {
+
+				binZahl=binZahl+bin[i];
+			}
+			
 		}
 
 		return binZahl;

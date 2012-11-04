@@ -88,7 +88,7 @@ public class Befehlsadressen {
 
 		else if(befehlspointer==114){
 			if(Befehlssatz.getInstance().bcd()==true){
-				befehlspointer = befehlspointer + 70;
+				befehlspointer = befehlspointer + 72;
 			}
 			else{
 				befehlspointer = befehlspointer + 2;
@@ -232,7 +232,7 @@ public class Befehlsadressen {
 
 		else if(befehlspointer == 166){
 			if(Befehlssatz.getInstance().bcd()==true){
-				befehlspointer = befehlspointer + 12;		//Sprung überprüfen
+				befehlspointer = befehlspointer + 10;		//Sprung überprüfen
 			}
 			else{
 				befehlspointer = befehlspointer + 2;
@@ -272,29 +272,40 @@ public class Befehlsadressen {
 			Befehlssatz.getInstance().swdd(0, 508);
 			befehlspointer = befehlspointer + 2;
 		}
-
-		else if(befehlspointer == 182){
-			befehlspointer = Befehlssatz.getInstance().bd(134);
-		}
 		
-		else if(befehlspointer == 184){
+		else if(befehlspointer == 182){
 			Befehlssatz.getInstance().clr(0);
 			befehlspointer = befehlspointer + 2;
 		}
 
+		
+		
+		
+		
+		
+		
+		else if(befehlspointer == 184){
+			befehlspointer = Befehlssatz.getInstance().bd(134);
+		}
+		
 		else if(befehlspointer == 186){
+			Befehlssatz.getInstance().clr(0);
+			befehlspointer = befehlspointer + 2;
+		}
+
+		else if(befehlspointer == 188){
 			Befehlssatz.getInstance().lwdd(0, 500);
 			befehlspointer = befehlspointer + 2;
 
 		}
 
-		else if(befehlspointer == 188){
+		else if(befehlspointer == 190){
 			Befehlssatz.getInstance().sll();
 			befehlspointer = befehlspointer + 2;
 
 		}
 
-		else if(befehlspointer == 190){
+		else if(befehlspointer == 192){
 			if(Befehlssatz.getInstance().bcd()==true){
 				befehlspointer = befehlspointer + 20;		//Sprung überprüfen
 			}
@@ -303,17 +314,17 @@ public class Befehlsadressen {
 			}
 		}
 
-		else if(befehlspointer == 192){
+		else if(befehlspointer == 194){
 			Befehlssatz.getInstance().lwdd(0, 500);
 			befehlspointer = befehlspointer + 2;
 		}
 
-		else if(befehlspointer == 194){
+		else if(befehlspointer == 196){
 			Befehlssatz.getInstance().dec();
 			befehlspointer = befehlspointer + 2;
 		}
 
-		else if(befehlspointer == 196){
+		else if(befehlspointer == 198){
 			if(Befehlssatz.getInstance().bzd()==true){
 				befehlspointer = befehlspointer + 10;
 			}
@@ -322,35 +333,35 @@ public class Befehlsadressen {
 			}
 		}
 
-		else if(befehlspointer == 198){
-			Befehlssatz.getInstance().swdd(0, 504);
-			befehlspointer = befehlspointer + 2;
-		}
-
 		else if(befehlspointer == 200){
-			Befehlssatz.getInstance().lwdd(1, 502);
+			Befehlssatz.getInstance().swdd(0, 504);
 			befehlspointer = befehlspointer + 2;
 		}
 
 		else if(befehlspointer == 202){
-			Befehlssatz.getInstance().lwdd(0, 502);
+			Befehlssatz.getInstance().lwdd(1, 502);
 			befehlspointer = befehlspointer + 2;
 		}
 
 		else if(befehlspointer == 204){
-			befehlspointer = Befehlssatz.getInstance().bd(128);
-		}
-		
-		else if(befehlspointer == 206){
 			Befehlssatz.getInstance().lwdd(0, 502);
 			befehlspointer = befehlspointer + 2;
 		}
 
+		else if(befehlspointer == 206){
+			befehlspointer = Befehlssatz.getInstance().bd(128);
+		}
+		
 		else if(befehlspointer == 208){
+			Befehlssatz.getInstance().lwdd(0, 502);
+			befehlspointer = befehlspointer + 2;
+		}
+
+		else if(befehlspointer == 210){
 			befehlspointer = Befehlssatz.getInstance().bd(146);		
 		}
 		
-		else if(befehlspointer == 210){
+		else if(befehlspointer == 212){
 			Befehlssatz.getInstance().srl();
 			befehlspointer = befehlspointer + 2;
 		}
@@ -359,52 +370,52 @@ public class Befehlsadressen {
 		
 		
 		
-		else if(befehlspointer == 212){
+		else if(befehlspointer == 214){
 			Befehlssatz.getInstance().dec();
 			befehlspointer = befehlspointer + 2;
 		}
 		
-		else if(befehlspointer == 214){
+		else if(befehlspointer == 216){
 			Befehlssatz.getInstance().swdd(0, 504);
 			befehlspointer = befehlspointer + 2;
 		}
 		
-		else if(befehlspointer == 216){
+		else if(befehlspointer == 218){
 			Befehlssatz.getInstance().lwdd(0, 502);
 			befehlspointer = befehlspointer + 2;
 		}
 		
-		else if(befehlspointer == 218){
+		else if(befehlspointer == 220){
 			Befehlssatz.getInstance().sll();
 			befehlspointer = befehlspointer + 2;
 		}
 		
-		else if(befehlspointer == 220){
+		else if(befehlspointer == 222){
 			Befehlssatz.getInstance().srl();
 			befehlspointer = befehlspointer + 2;
 		}
 		
-		else if(befehlspointer == 222){
+		else if(befehlspointer == 224){
 			Befehlssatz.getInstance().swdd(0, 512);
 			befehlspointer = befehlspointer + 2;
 		}
 		
-		else if(befehlspointer == 224){
+		else if(befehlspointer == 226){
 			Befehlssatz.getInstance().clr(0);
 			befehlspointer = befehlspointer + 2;
 		}
 		
-		else if(befehlspointer == 226){
+		else if(befehlspointer == 228){
 			Befehlssatz.getInstance().lwdd(1, 512);
 			befehlspointer = befehlspointer + 2;
 		}
 		
-		else if(befehlspointer == 228){
+		else if(befehlspointer == 230){
 			Befehlssatz.getInstance().lwdd(0, 512);
 			befehlspointer = befehlspointer + 2;
 		}
 
-		else if(befehlspointer == 230){
+		else if(befehlspointer == 232){
 			befehlspointer = Befehlssatz.getInstance().bd(128);		
 		}
 	}
@@ -450,37 +461,35 @@ public class Befehlsadressen {
 		befehlsliste.put("170", "170: INC");				//den Akku um eins erhöhen
 		befehlsliste.put("172", "172: SWDD 0, #508");		//Den Übertrag in Adresse 508 speichern
 		befehlsliste.put("174", "174: BD #134");			//Berechnung fortsetzen, indem Zähler geladen wird
-		
-		
-		
 		befehlsliste.put("176", "176: LWDD 0, #508");		//den "grossen Teil" der negativen Zahl in den Akku laden
 		befehlsliste.put("178", "178: DEC");				//den "grossen Teil" der negativen Zahl um eins verkleinern
 		befehlsliste.put("180", "180: SWDD 0, #508");		//Den Übertrag in Adresse 508 abspeichern
-		befehlsliste.put("182", "182: BD #134");			//Berechnung fortsetzen, indem der Zähler geladen wird
-		befehlsliste.put("184", "184: CLR 0");				//Carry-Flag löschen
-		befehlsliste.put("186", "186: LWDD 0, #500");		//Da der 2. Operand negativ war, den 1. Operanden laden und prüfen
-		befehlsliste.put("188", "188: SLL");				//Logisch nach links verschieben - prüfen, ob 1. Operand negativ ist
-		befehlsliste.put("190", "190: BCD #208");			//todo1: wenn auch 1. Operand negativ ist, zu Adr. xy springen
-		befehlsliste.put("192", "192: LWDD 0, #500");		//Operand 1 nochmals neu laden (ergibt Zähler)
-		befehlsliste.put("194", "194: DEC");				//Zähler um 1 verkleinern
-		befehlsliste.put("196", "196: BZD #204");			//Wenn der 1. Operand 1 war, 2. Operanden als Resultat ausgeben
-		befehlsliste.put("198", "198: SWDD 0, #504");		//Zähler in Adresse 504 abspeichern
-		befehlsliste.put("200", "200: LWDD 1, #502");		//2. Operanden ins Register 1 laden
-		befehlsliste.put("202", "202: LWDD 0, #502");		//2. Operanden in Akku laden
-		befehlsliste.put("204", "204: BCD #128");			//Zu Adresse ... springen, um die Multiplikation auszuführen
-		befehlsliste.put("206", "206: LWDD 0, #502");		//Operand 2 als Resultat ausgeben
-		befehlsliste.put("208", "208: BD #146");			//Sprung in die "End-Schlaufe"
-		befehlsliste.put("210", "210: SLR");				//2. Zahl positiv machen
-		befehlsliste.put("212", "212: DEC");				//2. nun positive Zahl zum Zähler machen und um eins verringern
-		befehlsliste.put("214", "214: SWDD 0, #504");		//Zähler abspeichern
-		befehlsliste.put("216", "216: LWDD 0, #502");		//2. Zahl wieder laden um das Vorzeichen umzudrehen
-		befehlsliste.put("218", "218: SLL");				//Zahl logisch nach links verschieben
-		befehlsliste.put("220", "220: SLR");				//Zahl wieder logisch nach rechts verschieben
-		befehlsliste.put("222", "222: SWDD 0, #512");		//positive Zahl im Speicher ablegen
-		befehlsliste.put("224", "224: CLR 0");				//Akku löschen und Carry-Flag auf 0 zurücksetzen
-		befehlsliste.put("226", "226: LWDD 1, #512");		//Operand in Register 1 laden
-		befehlsliste.put("228", "228: LWDD 0, #512");		//Operand in Akku laden
-		befehlsliste.put("230", "230: BD #128");			//Mit der Multiplikation beginnen
+		befehlsliste.put("182", "182: CLR 0");				//Carry-Flag löschen
+		befehlsliste.put("184", "184: BD #134");			//Berechnung fortsetzen, indem der Zähler geladen wird
+		befehlsliste.put("186", "186: CLR 0");				//Carry-Flag löschen
+		befehlsliste.put("188", "188: LWDD 0, #500");		//Da der 2. Operand negativ war, den 1. Operanden laden und prüfen
+		befehlsliste.put("190", "190: SLL");				//Logisch nach links verschieben - prüfen, ob 1. Operand negativ ist
+		befehlsliste.put("192", "192: BCD #210");			//todo1: wenn auch 1. Operand negativ ist, zu Adr. xy springen
+		befehlsliste.put("194", "194: LWDD 0, #500");		//Operand 1 nochmals neu laden (ergibt Zähler)
+		befehlsliste.put("196", "196: DEC");				//Zähler um 1 verkleinern
+		befehlsliste.put("198", "198: BZD #204");			//Wenn der 1. Operand 1 war, 2. Operanden als Resultat ausgeben
+		befehlsliste.put("200", "200: SWDD 0, #504");		//Zähler in Adresse 504 abspeichern
+		befehlsliste.put("202", "202: LWDD 1, #502");		//2. Operanden ins Register 1 laden
+		befehlsliste.put("204", "204: LWDD 0, #502");		//2. Operanden in Akku laden
+		befehlsliste.put("206", "206: BCD #128");			//Zu Adresse ... springen, um die Multiplikation auszuführen
+		befehlsliste.put("208", "208: LWDD 0, #502");		//Operand 2 als Resultat ausgeben
+		befehlsliste.put("210", "210: BD #146");			//Sprung in die "End-Schlaufe"
+		befehlsliste.put("212", "212: SLR");				//2. Zahl positiv machen
+		befehlsliste.put("214", "214: DEC");				//2. nun positive Zahl zum Zähler machen und um eins verringern
+		befehlsliste.put("216", "216: SWDD 0, #504");		//Zähler abspeichern
+		befehlsliste.put("218", "218: LWDD 0, #502");		//2. Zahl wieder laden um das Vorzeichen umzudrehen
+		befehlsliste.put("220", "220: SLL");				//Zahl logisch nach links verschieben
+		befehlsliste.put("222", "222: SLR");				//Zahl wieder logisch nach rechts verschieben
+		befehlsliste.put("224", "224: SWDD 0, #512");		//positive Zahl im Speicher ablegen
+		befehlsliste.put("226", "226: CLR 0");				//Akku löschen und Carry-Flag auf 0 zurücksetzen
+		befehlsliste.put("228", "228: LWDD 1, #512");		//Operand in Register 1 laden
+		befehlsliste.put("230", "230: LWDD 0, #512");		//Operand in Akku laden
+		befehlsliste.put("232", "232: BD #128");			//Mit der Multiplikation beginnen
 	}
 
 	public String getBefehlsliste(String key){
