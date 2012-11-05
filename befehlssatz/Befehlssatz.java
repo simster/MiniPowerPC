@@ -340,7 +340,6 @@ public class Befehlssatz {
 			int ergebnisGross = (Speicheradressen.getInstance().getS508() * 32768) + Speicheradressen.getInstance().getS510();
 			ergebnis = "Das Reslutat lautet: "+ ergebnisGross;
 		}
-		System.out.println("ENDE");
 		Prozessor_Gui.getInstance().popUpEnd(ergebnis);
 	}
 

@@ -18,6 +18,8 @@ public class Prozessor_Gui extends JPanel{
 
 	private static Prozessor_Gui instance = null;
 
+	private final Object lock1 = new Object();
+
 	private static final long serialVersionUID = 1L;
 	private JLabel lblZehner = new JLabel("10er-System");
 	private JLabel lblBinaer = new JLabel("2er-System");
@@ -135,7 +137,7 @@ public class Prozessor_Gui extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setStartposition();
-				refresh();
+				refresh2();
 
 			}
 		});
@@ -146,7 +148,7 @@ public class Prozessor_Gui extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nextStep();
-				refresh();
+				refresh2();
 			}
 		});
 
@@ -156,6 +158,7 @@ public class Prozessor_Gui extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {	
 				slowRun();
+				refresh2();
 			}
 		});
 
@@ -165,7 +168,7 @@ public class Prozessor_Gui extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				fastRun();
-				refresh();
+				refresh2();
 			}
 		});
 
@@ -535,15 +538,49 @@ public class Prozessor_Gui extends JPanel{
 		Befehlsadressen.getInstance().setBefehlspointer(100);
 	}
 
-	public void refresh() {
+	public void refresh2() {
 		//Befehlshistory nachführen
-		lblBefehlu5.setText(lblBefehlu4.getText());
-		lblBefehlu4.setText(lblBefehlu3.getText());
-		lblBefehlu3.setText(lblBefehlu2.getText());
-		lblBefehlu2.setText(lblBefehlu1.getText());
-		lblBefehlu1.setText(lblAktBefehlI.getText());
-
 		int pointer = Befehlsadressen.getInstance().getBefehlspointer();
+
+
+
+		//		lblBefehlu5.setText(lblBefehlu4.getText());
+		//		lblBefehlu4.setText(lblBefehlu3.getText());
+		//		lblBefehlu3.setText(lblBefehlu2.getText());
+		//		lblBefehlu2.setText(lblBefehlu1.getText());
+		//		lblBefehlu1.setText(lblAktBefehlI.getText());
+
+		if(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer - 10))==null){
+			lblBefehlu5.setText("---");
+		}
+		else{
+			lblBefehlu5.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer - 10)));
+		}
+		if(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer - 8))==null){
+			lblBefehlu4.setText("---");
+		}
+		else{
+			lblBefehlu4.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer - 8)));
+		}
+		if(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer - 6))==null){
+			lblBefehlu3.setText("---");
+		}
+		else{
+			lblBefehlu3.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer - 6)));
+		}
+		if(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer - 4))==null){
+			lblBefehlu3.setText("---");
+		}
+		else{
+			lblBefehlu2.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer - 4)));
+		}
+		if(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer - 2))==null){
+			lblBefehlu3.setText("---");
+		}
+		else{
+			lblBefehlu1.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer - 2)));
+		}
+
 		lblBefehln1.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 2)));
 		lblBefehln2.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 4)));
 		lblBefehln3.setText(Befehlsadressen.getInstance().getBefehlsliste("" + (pointer + 6)));
@@ -601,7 +638,8 @@ public class Prozessor_Gui extends JPanel{
 		lblReg1IB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getReg1()));
 		lblReg2IB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getReg2()));
 		lblReg3IB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getReg3()));
-		
+
+		this.repaint();
 
 
 
@@ -642,22 +680,42 @@ public class Prozessor_Gui extends JPanel{
 
 
 
-	public void slowRun(){
-		while(Befehlsadressen.getInstance().getBefehlspointer()!=148){
-			nextStep();
-			refresh();	
-		}
-		pause();
+	public void slowRun(){	
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(Befehlsadressen.getInstance().getBefehlspointer()!=148){
+					synchronized (lock1) {
+						refresh2();
+
+					}
+					doSomething();
+					synchronized (lock1) {
+						refresh2();
+					}
+				}
+			}
+		});
+		t.start();	
+
+
+		nextStep();
+
+
 	}
 
+	private synchronized void doSomething() {
+		nextStep();
 
-	public void pause() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			System.out.println("oops");
+			e.printStackTrace();
 		}
+
 	}
+
+
 
 	public void bereinigen(){
 		Prozessorvariablen.getInstance().setAkku(0);
@@ -727,7 +785,7 @@ public class Prozessor_Gui extends JPanel{
 		lblSp13.setText("524 + 525: " + Speicheradressen.getInstance().getS524());
 		lblSp14.setText("526 + 527: " + Speicheradressen.getInstance().getS526());
 		lblSp15.setText("528 + 529: " + Speicheradressen.getInstance().getS528());
-		
+
 		lblSp1B.setText(dezimalToBinary(Speicheradressen.getInstance().getS500()));
 		lblSp2B.setText(dezimalToBinary(Speicheradressen.getInstance().getS502()));
 		lblSp3B.setText(dezimalToBinary(Speicheradressen.getInstance().getS504()));
@@ -743,7 +801,7 @@ public class Prozessor_Gui extends JPanel{
 		lblSp13B.setText(dezimalToBinary(Speicheradressen.getInstance().getS524()));
 		lblSp14B.setText(dezimalToBinary(Speicheradressen.getInstance().getS526()));
 		lblSp15B.setText(dezimalToBinary(Speicheradressen.getInstance().getS528()));
-		
+
 		lblAkkuIB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getAkku()));
 		lblReg1IB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getReg1()));
 		lblReg2IB.setText(dezimalToBinary(Prozessorvariablen.getInstance().getReg2()));
@@ -797,7 +855,7 @@ public class Prozessor_Gui extends JPanel{
 
 				binZahl=binZahl+bin[i];
 			}
-			
+
 		}
 
 		return binZahl;

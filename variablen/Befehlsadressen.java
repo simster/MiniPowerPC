@@ -8,6 +8,7 @@ public class Befehlsadressen {
 
 	private static Befehlsadressen instance = null;
 
+
 	private int befehlspointer;
 	private HashMap<String, String> befehlsliste = new HashMap<String, String>();
 
